@@ -1,6 +1,6 @@
 var CustomizeTwitterWidget = function(data) {
     var notNumeric = function(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
+        return isNaN(parseFloat(n)) && isFinite(n);
     }
 
     var createCssElement = function(doc, url) {
