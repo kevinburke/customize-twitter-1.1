@@ -26,3 +26,10 @@ CustomizeTwitterWidget({
 </script>
 ```
 
+### Options
+
+- **url**: A link to the custom CSS you want to inject into Twitter's iframe.
+- **widget_count**: In case you have multiple Twitter widgets on a page, use
+this to ensure the custom CSS gets embedded in all of them. (Default: 1)
+- **timeout_length**: Specify a custom timeout length.
+
