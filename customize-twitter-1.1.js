@@ -34,6 +34,7 @@ var CustomizeTwitterWidget = function(data) {
                 framesWithStyles.push(frames[i].name);
             }
         }
+
         if (framesWithStyles.length < widgetCount) {
             setTimeout(function() {
                 evaluate(framesWithStyles);
