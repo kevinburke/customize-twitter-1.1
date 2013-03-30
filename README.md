@@ -13,8 +13,7 @@ Embed a Twitter Widget
 
 ```
 
-Embed the Twitter Javascript, preferably in the footer, as it'll block
-otherwise
+Embed the Twitter Javascript, preferably in the footer
 
 ```html
 <script>
