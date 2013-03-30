@@ -1,17 +1,8 @@
 var CustomizeTwitterWidget = function(data) {
-    if (data.url === undefined) {
-        console.log("need to specify a link to your CSS file. quitting");
-        return;
-    }
     var notNumeric = function(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
-    var widgetCount;
-    if (data.widget_count === undefined || notNumeric(data.widget_count)) {
-        widgetCount = 1;
-    } else {
-        widgetCount = data.widget_count;
-    }
+
     var createCssElement = function(doc, url) {
         var link = doc.createElement("link");
         link.href = url;
@@ -19,6 +10,7 @@ var CustomizeTwitterWidget = function(data) {
         link.type = "text/css";
         return link;
     }
+
     var embedCss = function(doc, url) {
         var link = createCssElement(doc, url);
         var head = doc.getElementsByTagName("head")[0];
@@ -28,9 +20,12 @@ var CustomizeTwitterWidget = function(data) {
     var contains = function(haystack, needle) {
         return haystack.indexOf(needle) >= 0;
     }
-    var framesWithStyles = [];
 
-    var evaluate = function() {
+    /**
+     * The main event loop - calls itself if we haven't found all of the frames
+     * yet.
+     */
+    var evaluate = function(framesWithStyles, widgetCount, timeoutLength) {
         for (var i = 0; i < frames.length; i++) {
             if (contains(frames[i].name, "twitter-widget") &&
                 !contains(framesWithStyles, frames[i].name)
@@ -40,10 +35,31 @@ var CustomizeTwitterWidget = function(data) {
             }
         }
         if (framesWithStyles.length < widgetCount) {
-            setTimeout(evaluate, 500);
+            setTimeout(function() {
+                evaluate(framesWithStyles);
+            }, timeoutLength);
         }
     }
 
-    setTimeout(evaluate, 500);
+    if (data.url === undefined) {
+        console.log("need to specify a link to your CSS file. quitting");
+        return;
+    }
+    var widgetCount;
+    if (data.widget_count === undefined || notNumeric(data.widget_count)) {
+        widgetCount = 1;
+    } else {
+        widgetCount = data.widget_count;
+    }
+    var timeoutLength;
+    if (data.timeout_length === undefined || notNumeric(data.timeout_length)) {
+        timeoutLength = 300;
+    } else {
+        timeoutLength = data.timeout_length;
+    }
+
+    setTimeout(function() {
+        evaluate([], widgetCount, timeoutLength);
+    }, timeoutLength);
 }
 
