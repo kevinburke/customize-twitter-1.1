@@ -15,14 +15,22 @@ otherwise
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 ```
 
-Afterwards, embed this custom JS
+Embed the Customize-Twitter JS.
 
 ```html
-<script src="customize-twitter-1.1.js" type="text/javascript"></script>
+<script src="customize-twitter-1.1.min.js" type="text/javascript"></script>
+```
+
+Finally, initialize the widget. This function will continue to call itself
+until the Twitter iframe appears, no need for detecting the iframe load on your
+end.
+
+```html
 <script>
-CustomizeTwitterWidget({
+var options = {
     "url": "/my-styles.css"
-});
+};
+CustomizeTwitterWidget(options);
 </script>
 ```
 
