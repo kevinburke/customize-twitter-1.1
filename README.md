@@ -1,4 +1,4 @@
-Add custom CSS to the Twitter 1.1 Widget
+Add custom CSS to the Twitter 1.1 Embed Widget
 
 ## Usage
 
