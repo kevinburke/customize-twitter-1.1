@@ -1,0 +1,49 @@
+var CustomizeTwitterWidget = function(data) {
+    if (data.url === undefined) {
+        console.log("need to specify a link to your CSS file. quitting");
+        return;
+    }
+    var notNumeric = function(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+    var widgetCount;
+    if (data.widget_count === undefined || notNumeric(data.widget_count)) {
+        widgetCount = 1;
+    } else {
+        widgetCount = data.widget_count;
+    }
+    var createCssElement = function(doc, url) {
+        var link = doc.createElement("link");
+        link.href = url;
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        return link;
+    }
+    var embedCss = function(doc, url) {
+        var link = createCssElement(doc, url);
+        var head = doc.getElementsByTagName("head")[0];
+        head.appendChild(link);
+    }
+
+    var contains = function(haystack, needle) {
+        return haystack.indexOf(needle) >= 0;
+    }
+    var framesWithStyles = [];
+
+    var evaluate = function() {
+        for (var i = 0; i < frames.length; i++) {
+            if (contains(frames[i].name, "twitter-widget") &&
+                !contains(framesWithStyles, frames[i].name)
+            ) {
+                embedCss(frames[i].document, data.url);
+                framesWithStyles.push(frames[i].name);
+            }
+        }
+        if (framesWithStyles.length < widgetCount) {
+            setTimeout(evaluate, 500);
+        }
+    }
+
+    setTimeout(evaluate, 500);
+}
+
