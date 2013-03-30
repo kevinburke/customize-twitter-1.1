@@ -19,5 +19,10 @@ Afterwards, embed this custom JS
 
 ```html
 <script src="customize-twitter-1.1.js" type="text/javascript"></script>
+<script>
+CustomizeTwitterWidget({
+    "url": "/my-styles.css"
+});
+</script>
 ```
 
