@@ -6,9 +6,10 @@ Embed a Twitter Widget
 
 ```html
 <a class="twitter-timeline" 
-    data-chrome="noheader noborders transparent nofooter" 
-    data-link-color="#8e1d08" 
-    data-dnt="true" 
+    data-chrome="noheader noborders transparent nofooter"
+    data-link-color="#8e1d08"
+    data-dnt="true"
+    data-widget-id="your-widget-id"
     href="https://twitter.com/ekrubnivek"></a>
 
 ```
