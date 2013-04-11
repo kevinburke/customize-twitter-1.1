@@ -22,13 +22,7 @@ var CustomizeTwitterWidget = function(data) {
     };
 
     var isTwitterFrame = function(frame) {
-        var clsList = frame.frameElement.classList;
-        for (var i = 0; i < clsList.length; i++) {
-            if (clsList[i] === "twitter-widget") {
-                return true;
-            }
-        }
-        return false;
+        return frame.frameElement.id.indexOf('twitter-widget') >= 0;
     }
 
     /**
