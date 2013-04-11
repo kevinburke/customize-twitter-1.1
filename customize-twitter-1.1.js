@@ -1,7 +1,7 @@
 var CustomizeTwitterWidget = function(data) {
     var notNumeric = function(n) {
         return isNaN(parseFloat(n)) && isFinite(n);
-    }
+    };
 
     var createCssElement = function(doc, url) {
         var link = doc.createElement("link");
@@ -9,16 +9,26 @@ var CustomizeTwitterWidget = function(data) {
         link.rel = "stylesheet";
         link.type = "text/css";
         return link;
-    }
+    };
 
     var embedCss = function(doc, url) {
         var link = createCssElement(doc, url);
         var head = doc.getElementsByTagName("head")[0];
         head.appendChild(link);
-    }
+    };
 
     var contains = function(haystack, needle) {
         return haystack.indexOf(needle) >= 0;
+    };
+
+    var isTwitterFrame = function(frame) {
+        var clsList = frame.frameElement.classList;
+        for (var i = 0; i < clsList.length; i++) {
+            if (clsList[i] === "twitter-widget") {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -27,11 +37,11 @@ var CustomizeTwitterWidget = function(data) {
      */
     var evaluate = function(framesWithStyles, widgetCount, timeoutLength) {
         for (var i = 0; i < frames.length; i++) {
-            if (contains(frames[i].name, "twitter-widget") &&
+            if (isTwitterFrame(frames[i]) &&
                 !contains(framesWithStyles, frames[i].name)
             ) {
                 embedCss(frames[i].document, data.url);
-                framesWithStyles.push(frames[i].name);
+                framesWithStyles.push(i);
             }
         }
 
