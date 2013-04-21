@@ -58,3 +58,19 @@ this to ensure the custom CSS gets embedded in all of them. (Default: 1)
 - **timeout_length**: Specify a custom timeout length, in milliseconds.
 (Default: 300)
 
+### Tested Browsers
+
+This plugin works for the stable versions of the following browsers:
+
+- Chrome 
+- Firefox 
+- Opera 
+- Safari
+
+As well as:
+
+- Internet Explorer 10
+
+Other browsers have not been tested yet. If you have feedback, please, send it!
+
+
