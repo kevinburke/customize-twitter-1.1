@@ -31,11 +31,16 @@ var CustomizeTwitterWidget = function(data) {
      */
     var evaluate = function(framesWithStyles, widgetCount, timeoutLength) {
         for (var i = 0; i < frames.length; i++) {
-            if (isTwitterFrame(frames[i]) &&
-                !contains(framesWithStyles, frames[i].name)
-            ) {
-                embedCss(frames[i].document, data.url);
-                framesWithStyles.push(i);
+            try {
+                if (isTwitterFrame(frames[i]) &&
+                    !contains(framesWithStyles, frames[i].name)
+                ) {
+                    embedCss(frames[i].document, data.url);
+                    framesWithStyles.push(i);
+                }
+            } catch(e) {
+                console.log("caught an error");
+                console.log(e);
             }
         }
 
