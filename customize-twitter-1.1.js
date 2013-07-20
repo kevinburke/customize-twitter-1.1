@@ -1,4 +1,15 @@
 var CustomizeTwitterWidget = function(data) {
+    // ie hack, http://stackoverflow.com/a/10183573/329700
+    if(!(window.console && console.log)) {
+      console = {
+        log: function(){},
+        debug: function(){},
+        info: function(){},
+        warn: function(){},
+        error: function(){}
+      };
+    }
+
     var notNumeric = function(n) {
         return isNaN(parseFloat(n)) && isFinite(n);
     };
