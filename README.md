@@ -1,13 +1,13 @@
 Add custom CSS to the Twitter 1.1 Embed Widget. [View a demo][demo]
 
-[demo]: http://kevinburke.github.com/customize-twitter-1.1/
+[demo]: https://kevinburke.github.io/customize-twitter-1.1/
 
 ## Usage
 
 Embed a Twitter Widget
 
 ```html
-<a class="twitter-timeline" 
+<a class="twitter-timeline"
     data-chrome="noheader noborders transparent nofooter"
     data-link-color="#8e1d08"
     data-dnt="true"
@@ -62,9 +62,9 @@ this to ensure the custom CSS gets embedded in all of them. (Default: 1)
 
 This plugin works for the stable versions of the following browsers:
 
-- Chrome 
-- Firefox 
-- Opera 
+- Chrome
+- Firefox
+- Opera
 - Safari
 
 As well as:
