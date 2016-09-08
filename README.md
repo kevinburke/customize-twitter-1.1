@@ -47,6 +47,18 @@ CustomizeTwitterWidget(options);
 </script>
 ```
 
+You can also inject CSS into a `<script>` tag in the iframe `<head>` by instead setting the `internalStyle` option. Due to the structure of the default Twitter CSS, you may need to use a lot of `!important` to override it this way.
+
+```html
+<script>
+var options = {
+    "internalStyle":"body {font-size:24px;}"
+};
+CustomizeTwitterWidget(options);
+</script>
+```
+
+
 ### Options
 
 Pass these as key/value pairs to the `CustomizeTwitterWidget` function as you

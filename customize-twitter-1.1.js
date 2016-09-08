@@ -28,6 +28,21 @@ var CustomizeTwitterWidget = function(data) {
         head.appendChild(link);
     };
 
+    var createStyleElement = function(doc, styleString) {
+        var style = doc.createElement("style");
+        style.setAttribute('type', 'text/css');
+        style.textContent = styleString;
+        //TODO: I don't think IE8 supports .textContent so might need to fallback to...
+        //style.styleSheet.cssText = styleString; IE8?
+        return style;
+    };
+
+    var embedStyle = function(doc, styleString) {
+        var style = createStyleElement(doc, styleString);
+        var head = doc.getElementsByTagName("head")[0];
+        head.appendChild(style);
+    };
+
     var contains = function(haystack, needle) {
         return haystack.indexOf(needle) >= 0;
     };
@@ -46,7 +61,11 @@ var CustomizeTwitterWidget = function(data) {
                 if (isTwitterFrame(frames[i]) &&
                     !contains(framesWithStyles, frames[i].name)
                 ) {
-                    embedCss(frames[i].document, data.url);
+                    if (data.internalStyle) {
+                        embedStyle(frames[i].document, data.internalStyle);
+                    } else {
+                        embedCss(frames[i].document, data.url);
+                    }
                     framesWithStyles.push(i);
                 }
             } catch(e) {
@@ -62,8 +81,8 @@ var CustomizeTwitterWidget = function(data) {
         }
     }
 
-    if (data.url === undefined) {
-        console.log("need to specify a link to your CSS file. quitting");
+    if (data.url === undefined && !data.internalStyle) {
+        console.log("need to specify a link to your CSS file or set inlineStyle. quitting");
         return;
     }
     var widgetCount;
@@ -83,4 +102,3 @@ var CustomizeTwitterWidget = function(data) {
         evaluate([], widgetCount, timeoutLength);
     }, timeoutLength);
 }
-
